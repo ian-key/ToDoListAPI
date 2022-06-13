@@ -13,10 +13,25 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
-          <h2>To-Do List</h2>
+          <h2>To-Do List App</h2>
+          <b>Instructions:</b>
+          <p>Welcome to your todo list! Check out your existing tasks or add a new one to the list.</p>
+          <hr>
+          <div id="filter">
+            <h4>Filter Options:</h4>
+            <button id="alltasks">All Tasks</button>
+            <button id="activetasks">Active Tasks</button>
+            <button id="completedtasks">Completed Tasks</button>
+          </div>
+          <div>
+            <hr>
+            <h4>Task Details:</h4>
+          </div>
           <div id="todo-list">
           </div>
+          <hr>
           <form id="create-task">
+            <b>Add a new task:</b></br>
             <input id="new-task-content" type="text" placeholder="Enter a task" required/>
             <button>Create</button>
           </form>
@@ -24,4 +39,7 @@
       </div>
     </div>
   </body>
+  <footer>
+    <div id="footer">An app made for the Altcademy course - Dynamic Website Development. Made by Ian Key.</div>
+  </footer>
 </html>

@@ -1,4 +1,25 @@
 $(document).ready(function(){
+
+  var displayState = null;
+
+  $('#alltasks').on('click', function () {
+    displayState = null;
+    getAndDisplayAllTasks();
+    console.log(displayState)
+  });
+
+  $('#activetasks').on('click', function () {
+    displayState = false;
+    getAndDisplayAllTasks();
+    console.log(displayState)
+  });
+
+  $('#completedtasks').on('click', function () {
+    displayState = true;
+    getAndDisplayAllTasks();
+    console.log(displayState)
+  });
+
   var getAndDisplayAllTasks = function () {
     $.ajax({
       type: 'GET',
@@ -7,7 +28,12 @@ $(document).ready(function(){
       success: function (response, textStatus) {
         $('#todo-list').empty(); 
         response.tasks.forEach(function (task) {
-          $('#todo-list').append('<div class="row"><p class="col-xs-8">' + task.content + '</p><button class="delete" data-id="' + task.id + '">Delete</button><input type="checkbox" class="mark-complete" data-id="' + task.id + '"' + (task.completed ? 'checked' : '') + '>');
+        if (displayState !== null) {
+        if (displayState === task.completed) {
+          appendTask(task);
+        } } else {
+          appendTask(task);
+        }
         });
       },
       error: function (request, textStatus, errorMessage) {
@@ -16,6 +42,10 @@ $(document).ready(function(){
     });
   }
   
+var appendTask = function (task) {
+  $('#todo-list').append('<div class="row"><p class="col-xs-8">' + task.content + '</p><button class="delete" data-id="' + task.id + '">Delete</button><input type="checkbox" class="mark-complete" data-id="' + task.id + '"' + (task.completed ? 'checked' : '') + '>');
+}
+
   var createTask = function () {
     $.ajax({
       type: 'POST',
